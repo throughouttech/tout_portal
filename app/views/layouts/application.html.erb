@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ToutPortal</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+     <% if current_admin.present? %>
+     <%= link_to "Admins",admin_admins_path %>
+     <%= link_to "Users", admin_users_path %>
+      <%= link_to "Profile", edit_admin_registration_path %>
+      <%= link_to "Logout", destroy_admin_session_path, :method => 'delete' %>
+      
+    <% end %>
+     <% if current_user.present? %>
+      <%= link_to "Profile", edit_user_registration_path %>
+      <%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
+    <% end %>
+    <%= yield %>   
+  </body>
+</html>
