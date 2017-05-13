@@ -9,17 +9,25 @@
   </head>
 
   <body>
+  <header>
+    <p id="notice"><%= notice %></p>
      <% if current_admin.present? %>
      <%= link_to "Admins",admin_admins_path %>
      <%= link_to "Users", admin_users_path %>
       <%= link_to "Profile", edit_admin_registration_path %>
       <%= link_to "Logout", destroy_admin_session_path, :method => 'delete' %>
-      
     <% end %>
      <% if current_user.present? %>
+     <%= link_to "Home", user_home_users_path %>
       <%= link_to "Profile", edit_user_registration_path %>
       <%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
     <% end %>
-    <%= yield %>   
+    </header>
+    <%= yield %>
+    <footer>
+    <% if current_admin.present? || current_user.present? %>
+    Throughout Technologies 2017
+    <% end %>
+    </footer>   
   </body>
 </html>

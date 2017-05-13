@@ -10,13 +10,12 @@
   </thead>
 
   <tbody>
-  <%=link_to "New User",new_user_registration_path%>
+  <%=link_to "New Users", new_admin_user_path %>
   </br>
     <% @user.each do |user| id = user.id %>
       <tr>
-      <td><%=link_to user.email,admin_user_path(id) %></td>
+      <td><%= link_to user.email, admin_user_path(id) %></td>
       <td><%= link_to 'Destroy', admin_user_path(id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
     <% end %>
   </tbody>
 </table>
