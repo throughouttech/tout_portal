@@ -1,46 +1,51 @@
+ <h2>Edit Profile<%= resource_name.to_s.humanize %></h2>
+<div class="container">
+  <div class="row" style="margin-top:20px">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+      <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
+        <%= devise_error_messages! %>
+        <fieldset>
+          <h4><%= @admin.email %></h4></br>
+          <div class="form-group" >
+            <label class="col-lg-6 control-label ">First name:</label>
+            <div class="col-lg-6 ">
+              <%= f.text_field :first_name, autofocus: true, class: 'form-control input-lg' %>
+            </div>
+          </div>
 
-  <h2>Edit Profile<%= resource_name.to_s.humanize %></h2>
-<%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
-  <%= devise_error_messages! %>
+          <div class="form-group">
+            <label class="col-lg-6 control-label ">Last name:</label>
+            <div class="col-lg-6 ">
+              <%= f.text_field :last_name, autofocus: true, class: 'form-control input-lg' %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+          <div class="form-group">
+            <label class="col-lg-6 control-label ">Contact No</label>
+            <div class="col-lg-6 ">
+             <%= f.text_field :contact_no, autofocus: true, class: 'form-control input-lg' %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :First_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+          <div class="form-group">
+            <label class="col-lg-6 control-label ">Permanent Address</label>
+            <div class="col-lg-6 ">
+               <%= f.text_field :address1, autofocus: true, class: 'form-control input-lg' %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :Last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
+          <div class="form-group">
+            <label class="col-lg-6 ">Temporary Adrress</label>
+            <div class="col-lg-6 ">
+              <%= f.text_field :address2, autofocus: true, class: 'form-control input-lg' %>
+            </div>
+         </div>
+      </fieldset>
+      </br>
+       <button type="f.submit" class=" btn btn-primary">Update</button>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :contact_no %><br />
-    <%= f.text_field :contact_no, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :permanent_address %><br />
-    <%= f.text_field :address1, autofocus: true %>
-  </div>
- 
-  <div class="field">
-    <%= f.label :temporary_address %><br />
-    <%= f.text_field :address2, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %><br />
-    <%= f.password_field :password, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-<%= link_to "change password",edit_user_password_path %></br>
-<%= link_to "Back", :back %>
+</div>
+</br>
+<%= link_to "Back", :back %></br>
+</br>

@@ -12,6 +12,14 @@ class Admin::AdminsController < ApplicationController
 
 	def create
    	 @admin = Admin.new(admin_params)
+
+    @admin.password = rand(11111111..99999999)
+
+    raw, enc = Devise.token_generator.generate(Admin, :reset_password_token)
+    @admin.reset_password_token = enc
+    @admin.reset_password_sent_at = Time.now.utc
+    @admin.password_token = raw
+
     respond_to do |format|
       if @admin.save
         format.html { redirect_to [:admin, @admin], notice: 'Admin was successfully created.' }
@@ -24,6 +32,7 @@ class Admin::AdminsController < ApplicationController
   end
 
   def destroy
+    @admin = Admin.find(params[:id])
     @admin.destroy
     respond_to do |format|
       format.html { redirect_to admin_admins_url, notice: 'Admin was successfully destroyed.' }

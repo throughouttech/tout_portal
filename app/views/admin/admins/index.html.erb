@@ -1,22 +1,53 @@
 <p id="notice"><%= notice %></p>
+<html>
+  <head>
+    <style >
+   .row {
+    margin-right: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+}
+     </style>
+  
+  </head>
 
-<h1>Admins</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <%=link_to "New Admin", new_admin_admin_path %>
-  </br>
+  <body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 text-left"> Admins </div>
+    <div class="col-sm-6 text-right"><%=link_to "New Admin", new_admin_admin_path %></div><br />
+  </div>
+  <div class="table-responsive">          
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Contact no.</th>
+        <th>Permanent Address</th>
+        <th>Temporary Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
     <% @admin.each do |admin| id = admin.id %>
       <tr>
-      <td><%= link_to admin.email, admin_admin_path(id) %></td>
-      <td><%= link_to 'Destroy', admin_admin_path(id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= admin.email %></td>
+        <td><%= admin.first_name %></td>
+        <td><%= admin.last_name %></td>
+        <td><%= admin.contact_no %></td>
+        <td><%= admin.address1 %></td>
+        <td><%= admin.address2 %></td>
+        <td><%= link_to 'Destroy', admin_admin_path(id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
-  </tbody>
-</table>
-<br>
+    </tbody>
+  </table>
+  </div>
+</div>
+ 
+  </body>
+
+</html>
+

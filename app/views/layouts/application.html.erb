@@ -1,33 +1,110 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>ToutPortal</title>
-    <%= csrf_meta_tags %>
+    <%= javascript_include_tag "application"%>
+    <%= csrf_meta_tag %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    .text-center {
+    margin: 0 0 305px;
+    padding: 10px 0px;
+}
+
+
+  header .cont {
+
+    margin-bottom: 0px;
+  }
+
+    ul {
+      padding-top: 14px;
+    }
+
+    a{
+      padding-left: 12px;
+    }
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
   </head>
-
   <body>
-  <header>
-    <p id="notice"><%= notice %></p>
-     <% if current_admin.present? %>
-     <%= link_to "Admins",admin_admins_path %>
-     <%= link_to "Users", admin_users_path %>
-      <%= link_to "Profile", edit_admin_registration_path %>
-      <%= link_to "Logout", destroy_admin_session_path, :method => 'delete' %>
-    <% end %>
-     <% if current_user.present? %>
-     <%= link_to "Home", user_home_users_path %>
-      <%= link_to "Profile", edit_user_registration_path %>
-      <%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
-    <% end %>
+    <header>
+    <nav class="navbar navbar-inverse cont">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <!-- <a class="navbar-brand" href="#">Logo</a>
+ -->        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+           <% if current_admin.present? %>
+          <li><%= link_to "Admins",admin_admins_path %></li>
+          <li><%= link_to "Users", admin_users_path %></li>
+          <li><%= link_to "Profile", edit_admin_registration_path %></li>
+          <li><%= link_to "Logout", destroy_admin_session_path, :method => 'delete' %></li>
+          <% end %>
+          <% if current_user.present? %>
+          <li><%= link_to "Profile", edit_user_registration_path %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %></li>
+          <% end %>
+          </ul>
+           <% unless current_admin.present? || current_user.present? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href= "users/sign_in"<span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+           <% end %>
+        </div>
+      </div>
+    </nav>
     </header>
-    <%= yield %>
-    <footer>
+         <div class="text-center" >
+         <% if !flash.empty? %>
+             <div class="alert alert-success">
+               <%= notice %>
+             </div>
+             <% end %>
+        <%= yield %>
+       </div>
     <% if current_admin.present? || current_user.present? %>
-    Throughout Technologies 2017
+    <footer style="text-align: center;">
+      Throughout Technologies @2017
+    </footer>
     <% end %>
-    </footer>   
+
   </body>
 </html>

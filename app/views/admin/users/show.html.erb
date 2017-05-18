@@ -1,8 +1,5 @@
-<h1>Details</h1>
- <% user = User.find(params[:id]) %>
- <%= user.email %><br />
- <%= user.first_name %><br />
- <%= user.last_name %><br />
- <%= user.contact_no %><br />
- <%= user.address1 %><br />
- <%= user.address2 %><br />
+<div class="alert alert-success">
+    <%= notice %>
+</div>
+<% @user = User.find(params[:id]) %>
+<%= @user.email %>
