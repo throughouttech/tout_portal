@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   namespace :admin do
   	resources :users 
   	resources :admins 
+  	resources :leaves
+    resources :leave_types
   end
   
   resources :users
+  resources :leaves
 end
