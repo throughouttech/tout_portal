@@ -1,6 +1,5 @@
 class Admin::AdminsController < ApplicationController
-	def show
-	end
+  before_action :find_admin
 
 	def index
 		@admin = Admin.all
@@ -11,7 +10,7 @@ class Admin::AdminsController < ApplicationController
 	end
 
 	def create
-   	 @admin = Admin.new(admin_params)
+   	@admin = Admin.new(admin_params)
 
     @admin.password = rand(11111111..99999999)
 
@@ -22,7 +21,7 @@ class Admin::AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to [:admin, @admin], notice: 'Admin was successfully created.' }
+        format.html { redirect_to admin_admins_url, notice: 'Admin was successfully created.' }
         format.json { render :show, status: :created, location: @admin }
       else
         format.html { render :new }
@@ -41,7 +40,15 @@ class Admin::AdminsController < ApplicationController
   end
 
   def admin_params
-     params.require(:admin).permit(:email, :password)
+    params.require(:admin).permit(:email, :password)
+  end
+
+  def find_admin
+    unless current_admin.present? 
+      respond_to do |format|
+          format.html { redirect_to new_admin_session, notice: 'please first sign in' }
+      end
+    end
   end
 
 end

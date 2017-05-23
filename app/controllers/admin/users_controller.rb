@@ -1,7 +1,5 @@
 class Admin::UsersController < ApplicationController
-  def show
-  end
-
+  before_action :find_admin
   def index
     @user = User.all
   end
@@ -22,7 +20,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-         format.html { redirect_to [:admin, @user], notice: 'user was successfully created.' }
+         format.html { redirect_to admin_users_url, notice: 'user was successfully created.' }
          format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -44,6 +42,14 @@ class Admin::UsersController < ApplicationController
 
    def user_params
      params.require(:user).permit(:email, :password)
+  end
+
+   def find_admin
+    unless current_admin.present? 
+      respond_to do |format|
+          format.html { redirect_to new_admin_session, notice: 'please first sign in' }
+      end
+    end
   end
 
 end

@@ -76,7 +76,7 @@
           <li><%= link_to "Admins",admin_admins_path %></li>
           <li><%= link_to "Users", admin_users_path %></li>
           <li><%= link_to "Profile", edit_admin_registration_path %></li>
-          <li><%= link_to "Leave Type",admin_leave_types_path %></li>
+          <li><%= link_to "Leaves",admin_leaves_path %></li>
           <li><%= link_to "Logout", destroy_admin_session_path, :method => 'delete' %></li>
           <% end %>
           <% if current_user.present? %>
@@ -94,18 +94,26 @@
       </div>
     </nav>
     </header>
-         <div class="text-center" >
-         <% if !flash.empty? %>
-             <div class="alert alert-success">
-               <%= notice %>
-             </div>
-             <% end %>
-        <%= yield %>
-       </div>
+    <div class="container-fluid ">
+      <ul class="nav navbar-nav navbar-right">
+        <%= form_tag( :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+          <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="text-center" >
+      <% if !flash.empty? %>
+        <div class="alert alert-success">
+          <%= notice %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
     <% if current_admin.present? || current_user.present? %>
-    <footer style="text-align: center;">
-      Throughout Technologies @2017
-    </footer>
+      <footer style="text-align: center;">
+        Throughout Technologies @2017
+      </footer>
     <% end %>
 
   </body>

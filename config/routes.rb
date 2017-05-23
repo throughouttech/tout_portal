@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   namespace :admin do
   	resources :users 
   	resources :admins 
-  	resources :leaves
+  	resources :leaves 
     resources :leave_types
   end
   
   resources :users
-  resources :leaves
+  resources :leaves do
+      member do
+        get 'approve'
+        get 'reject'
+      end
+    end
 end

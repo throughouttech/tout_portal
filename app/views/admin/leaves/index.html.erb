@@ -1,0 +1,56 @@
+ <head>
+    <style >
+   .row {
+    margin-right: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+    }
+     </style>
+  </head>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 text-left"> Leaves </div>
+    <div class="col-sm-6 text-right"><%= link_to "Leave Type",admin_leave_types_path %></div><br />
+  </div>
+  
+  <div class="table-responsive">          
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Leave Id</th>
+        <th>User Name</th>
+        <th>User Email</th>
+        <th>Leave For</th>
+      	<th>Leave Type</th>
+        <th>Description</th>
+        <th>Start At</th>
+        <th>end At</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @leave.each do |leave| id = leave.id %>
+      <tr>
+        <td><%=leave.id %></td>
+        <td><%= leave.user.name %></td>
+        <td><%= leave.user.email %></td>
+        <td><%= leave.leave_for %></td>
+ 				<td><%= leave.leave_type.name %></td>
+        <td><%= leave.description%></td>
+        <td><%= leave.start_at.strftime("%d/%m/%Y") %></td>
+        <td><%= leave.end_at.strftime("%d/%m/%Y") %></td>
+        <td><%= leave.status %></td>
+        <% if leave.start_at >= Date.today %>
+          <td>  <%= link_to "Approve",approve_leave_path(id), class: 'btn btn-success btn-sm' if leave.status != "Approved" %>
+            <%= link_to "Reject", reject_leave_path(id) , class: 'btn btn-danger btn-sm' if leave.status != "Rejected" %>
+        </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+<br>

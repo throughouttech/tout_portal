@@ -1,0 +1,49 @@
+
+  <head>
+    <style >
+   .row {
+    margin-right: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+}
+     </style>
+  </head>
+
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-6 text-left"> Leaves </div>
+    <div class="col-sm-6 text-right"><%=link_to "New leave", new_leave_path %></div><br />
+  </div>
+  <div class="table-responsive">          
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Leave Id </th>
+        <th>Leave For</th>
+      	<th>Leave Type</th>
+        <th>Description</th>
+        <th>Start At</th>
+        <th>end At</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @leave.each do |leave| id = leave.id %>
+      <tr>
+        <td><%= leave.id %></td>
+        <td><%= leave.leave_for %></td>
+ 				<td><%= leave.leave_type.name %></td>
+        <td><%= leave.description%></td>
+        <td><%= leave.start_at.strftime("%d/%m/%Y") %></td>
+        <td><%= leave.end_at.strftime("%d/%m/%Y") %></td>
+        <td><%= leave.status %></td>
+         <td><%= link_to 'Destroy', leave_path(id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        <%= link_to 'Edit', edit_leave_path(id), class: 'btn btn-warning btn-sm' if leave.status !="Approved" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+<br>
